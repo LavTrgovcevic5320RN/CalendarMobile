@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initView() {
-        loginBtn = findViewById(R.id.loginBtn);
-        email = findViewById(R.id.editTextTextEmailAddress);
-        username = findViewById(R.id.editTextTextUsername);
-        password = findViewById(R.id.editTextTextPassword);
+        loginBtn = findViewById(R.id.login_button);
+        email = findViewById(R.id.email_edit_text);
+        username = findViewById(R.id.username_edit_text);
+        password = findViewById(R.id.password_edit_text);
 
     }
 
