@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.example.myapplication.R;
-import com.example.myapplication.view.recycler.adapter.CarAdapter;
 import com.example.myapplication.viewmodels.RecyclerViewModel;
 
 public class RecyclerActivity extends AppCompatActivity {
@@ -23,7 +22,7 @@ public class RecyclerActivity extends AppCompatActivity {
     private ConstraintLayout mainLayout;
 
     private RecyclerViewModel recyclerViewModel;
-    private CarAdapter carAdapter;
+//    private CarAdapter carAdapter;/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,30 +58,30 @@ public class RecyclerActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                recyclerViewModel.filterCars(s.toString());
+//                recyclerViewModel.filterCars(s.toString());
             }
         });
 
         addBtn.setOnClickListener(v -> {
-            showAddSnackBar(
-                    recyclerViewModel.addCar("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR9vMHQzf3GMYiI2WnYG9TUKnGAQFevruSgJF35VLAJe_odBMVd&usqp=CAU",
-                            "Ikea",
-                            "LILLABO")
-            );
+//            showAddSnackBar(
+//                    recyclerViewModel.addCar("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR9vMHQzf3GMYiI2WnYG9TUKnGAQFevruSgJF35VLAJe_odBMVd&usqp=CAU",
+//                            "Ikea",
+//                            "LILLABO")
+//            );
         });
     }
 
     private void showAddSnackBar(int id) {
         Snackbar
                 .make(mainLayout, "Item added", Snackbar.LENGTH_SHORT)
-                .setAction("Undo", view -> recyclerViewModel.removeCar(id))
+//                .setAction("Undo", view -> recyclerViewModel.removeCar(id))
                 .show();
     }
 
     private void initObservers() {
-        recyclerViewModel.getCars().observe(this, cars -> {
-            carAdapter.submitList(cars);
-        });
+//        recyclerViewModel.getCars().observe(this, cars -> {
+//            carAdapter.submitList(cars);
+//        });
     }
 
 //    private void initRecycler() {

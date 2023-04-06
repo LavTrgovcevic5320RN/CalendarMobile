@@ -2,6 +2,7 @@ package com.example.myapplication.view.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import androidx.core.splashscreen.SplashScreen;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
+import com.example.myapplication.model.User;
 import com.example.myapplication.viewmodels.SplashViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,6 +22,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import timber.log.Timber;
 
@@ -69,21 +75,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-//        styledBtn.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, StyledActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        rotationBtn.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, RotationActivity.class);
-//            startActivity(intent);
-//        });
-//
-//        classicRecyclerBtn.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, RecyclerActivity.class);
-//            startActivity(intent);
-//        });
-
         loginBtn.setOnClickListener(view -> {
             if (TextUtils.isEmpty(email.getText())) {
                 email.setError("Email is required.");
@@ -110,25 +101,36 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            String credentials[] = readPasswordFromRawResource(getApplicationContext(), R.raw.password);
-//            Timber.d("Username is %s", credentials[0]);
-//            Timber.d("Password is %s", credentials[1]);
-            if (!username.getText().toString().equals(credentials[0])) {
-                Snackbar.make(findViewById(android.R.id.content), "Incorrect username.", Snackbar.LENGTH_SHORT).show();
+            Map<String,String> map = readPasswordFromRawResource(getApplicationContext(), R.raw.password);
+
+            if(!map.containsKey(email.getText().toString())){
+                Snackbar.make(findViewById(android.R.id.content), "Incorrect email.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
-            if(!password.getText().toString().equals(credentials[1])){
+            if(!map.containsValue(password.getText().toString())){
 //                Toast.makeText(MainActivity.this, "Incorrect password.", Toast.LENGTH_SHORT).show();
                 Snackbar.make(findViewById(android.R.id.content), "Incorrect password.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("email", email.getText().toString());
+            editor.putString("password", password.getText().toString());
+            editor.apply();
+
+//            String userInfo = email.getText().toString() + " " + password.getText().toString();
+//            sharedPreferences
+//                    .edit()
+//                    .putString("userInfo", userInfo)
+//                    .apply();
+            Toast.makeText(this, "Message written to preferences", Toast.LENGTH_SHORT).show();
 
             // Successful login
             Toast.makeText(MainActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(this, CalendarActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(this, BottomNavigationActivity.class);
+            startActivity(intent);
 
         });
     }
@@ -142,23 +144,32 @@ public class MainActivity extends AppCompatActivity {
         return password.matches(regex);
     }
 
-    public String[] readPasswordFromRawResource(Context context, int resourceId) {
+    public Map<String,String> readPasswordFromRawResource(Context context, int resourceId) {
         InputStream inputStream = context.getResources().openRawResource(resourceId);
         InputStreamReader reader = new InputStreamReader(inputStream);
         BufferedReader bufferedReader = new BufferedReader(reader);
+        Map<String,String> map = new HashMap<>();
 
         String[] credentials = null;
         try {
             String line = bufferedReader.readLine();
-            credentials = line.split("=");
+            while(line != null){
+                credentials = line.split("=");
+                map.put(credentials[0], credentials[1]);
+//                Timber.d("email je: %s", credentials[0]);
+//                Timber.d("sifra je: %s", credentials[1]);
+                line = bufferedReader.readLine();
+            }
+
             bufferedReader.close();
             reader.close();
             inputStream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return credentials;
+        return map;
     }
 
 
