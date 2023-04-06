@@ -232,8 +232,8 @@ public class ProfileFragment extends Fragment {
 
             // Replace the original file with the temporary file
             if (found) {
-                file.delete();
-                tempFile.renameTo(file);
+//                file.delete();
+//                tempFile.renameTo(file);
             } else {
                 tempFile.delete();
                 System.out.println("Email not found");
