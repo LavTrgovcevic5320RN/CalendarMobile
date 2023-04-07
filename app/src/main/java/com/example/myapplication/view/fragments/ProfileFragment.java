@@ -1,10 +1,13 @@
 package com.example.myapplication.view.fragments;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +26,14 @@ import com.example.myapplication.view.activities.MainActivity;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -52,7 +58,7 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email);
         changePasswordBtn = view.findViewById(R.id.change_password_btn);
         logOutBtn = view.findViewById(R.id.log_out_btn);
-        sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences("MyPrefs", MODE_PRIVATE);
 
         // Set profile picture and email
         // Replace the following lines with your own code to get the user's profile picture and email
@@ -123,6 +129,8 @@ public class ProfileFragment extends Fragment {
                 editor.putString("password", newPassword);
                 editor.apply();
 
+                changePassword(getContext(), R.raw.password, emailInfo, oldPassword, newPassword);
+
                 Toast.makeText(getActivity(), "Password change successful.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -136,9 +144,6 @@ public class ProfileFragment extends Fragment {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-
-
-
     }
 
     private void showLogOutDialog() {
@@ -191,52 +196,52 @@ public class ProfileFragment extends Fragment {
         return false;
     }
 
+
+
     public void changePassword(Context context, int resourceId, String email, String oldPassword, String newPassword) {
         try {
-            InputStream inputStream = context.getResources().openRawResource(resourceId);
-            InputStreamReader reader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            File dir = new File(getContext().getFilesDir(), "mydir");
+            File gpxfile = new File(dir, "password.txt");
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(gpxfile));
 
-            File tempFile = new File(context.getResources().getResourceName(resourceId) + ".txt");
+            File tempFile = new File(gpxfile.getAbsolutePath() + "1.txt");
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+//            Timber.d("---------------------------------");
+//            Timber.d(tempFile.getAbsolutePath());
+//            Timber.d("---------------------------------");
 
             String line;
             boolean found = false;
 
-            // Iterate through the file line by line
             while ((line = bufferedReader.readLine()) != null) {
                 String[] parts = line.split("=");
                 String currEmail = parts[0];
                 String currPassword = parts[1];
 
-                // Check if the current line contains the email we want to change the password for
                 if (currEmail.equals(email)) {
-                    // Check if the old password is correct
                     if (currPassword.equals(oldPassword)) {
-                        // Replace the old password with the new password
                         currPassword = newPassword;
                         found = true;
                     } else {
-                        // Password is incorrect
-                        System.out.println("Incorrect password");
+                        Timber.d("Incorrect password");
                     }
                 }
 
-                // Write the current line to the temporary file
                 writer.write(currEmail + "=" + currPassword);
                 writer.newLine();
             }
 
-            reader.close();
+            bufferedReader.close();
             writer.close();
 
-            // Replace the original file with the temporary file
             if (found) {
-//                file.delete();
-//                tempFile.renameTo(file);
+                gpxfile.delete();
+                tempFile.renameTo(gpxfile);
+
             } else {
                 tempFile.delete();
-                System.out.println("Email not found");
+                Timber.d("Email not found");
             }
         } catch (IOException e) {
             e.printStackTrace();

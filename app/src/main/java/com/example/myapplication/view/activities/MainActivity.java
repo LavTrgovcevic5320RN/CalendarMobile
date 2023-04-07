@@ -14,18 +14,17 @@ import androidx.core.splashscreen.SplashScreen;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.R;
-import com.example.myapplication.model.User;
 import com.example.myapplication.viewmodels.SplashViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import timber.log.Timber;
 
@@ -76,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initListeners() {
         loginBtn.setOnClickListener(view -> {
+//            Timber.d(getApplicationContext().getFilesDir().getAbsolutePath()); //   /data/user/0/com.example.myapplication/files
+//            Timber.d(String.valueOf(getApplicationContext().getFilesDir().isDirectory())); // TRUE
+//            Timber.d(String.valueOf(getApplicationContext().getFilesDir().isFile())); // FALSE
+
             if (TextUtils.isEmpty(email.getText())) {
                 email.setError("Email is required.");
                 return;
@@ -120,11 +123,6 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("password", password.getText().toString());
             editor.apply();
 
-//            String userInfo = email.getText().toString() + " " + password.getText().toString();
-//            sharedPreferences
-//                    .edit()
-//                    .putString("userInfo", userInfo)
-//                    .apply();
             Toast.makeText(this, "Message written to preferences", Toast.LENGTH_SHORT).show();
 
             // Successful login
@@ -150,24 +148,36 @@ public class MainActivity extends AppCompatActivity {
         BufferedReader bufferedReader = new BufferedReader(reader);
         Map<String,String> map = new HashMap<>();
 
-        String[] credentials = null;
+        String fileString = "";
+        String[] credentials;
         try {
+            File dir = new File(getApplicationContext().getFilesDir(), "mydir");
+            if(!dir.exists())
+                dir.mkdir();
+
+            File gpxfile = new File(dir, "password.txt");
+            FileWriter writer = new FileWriter(gpxfile);
+
             String line = bufferedReader.readLine();
             while(line != null){
                 credentials = line.split("=");
                 map.put(credentials[0], credentials[1]);
-//                Timber.d("email je: %s", credentials[0]);
-//                Timber.d("sifra je: %s", credentials[1]);
+
+                fileString += line + "\n";
                 line = bufferedReader.readLine();
             }
 
+            writer.append(fileString);
+
+            writer.flush();
+            writer.close();
             bufferedReader.close();
             reader.close();
             inputStream.close();
-
-        } catch (IOException e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
+
 
         return map;
     }
