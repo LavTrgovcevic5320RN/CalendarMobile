@@ -24,4 +24,6 @@
     <string name="month_november" />
     <string name="month_december" />
     <string name="tmp_email">TMP EMAIL</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

@@ -25,7 +25,7 @@ public class DayScheduleFragment extends Fragment {
 //    private ScheduleAdapter adapter;
 
     public DayScheduleFragment() {
-        // Required empty public constructor
+
     }
 
     public static DayScheduleFragment newInstance(CalendarDay day) {
@@ -52,7 +52,6 @@ public class DayScheduleFragment extends Fragment {
 
 //    private List<ScheduleItem> getScheduleItems() {
 //        List<ScheduleItem> items = new ArrayList<>();
-//        // Get schedule items for the selected day and add to the list
 //        // ...
 //        return items;
 //    }
@@ -63,7 +62,7 @@ public class DayScheduleFragment extends Fragment {
         if (getArguments() != null) {
             CalendarDay day = getArguments().getParcelable("day");
             if (day != null) {
-                // Do something with the selected day
+
             }
         }
     }
