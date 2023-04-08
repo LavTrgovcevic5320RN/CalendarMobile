@@ -20,7 +20,7 @@ public class BottomNavigationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        Timber.d("Usao 1");
-        setContentView(R.layout.activity_navigation_bottom);
+//        setContentView(R.layout.activity_navigation_bottom);
 //        Timber.d("Usao 2");
         init();
 //        Timber.d("Usao 12");

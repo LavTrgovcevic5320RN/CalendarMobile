@@ -1,9 +1,16 @@
 package com.example.myapplication.view.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+//    ActivityResultLauncher<Intent> sharedPreferencesActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+//                SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+//                String message = sharedPreferences.getString(PreferenceActivity.PREF_MESSAGE_KEY, "");
+//                if (message == null)
+//                    message = "Error";
+//                Toast.makeText(this, "We have written to pref: " + message, Toast.LENGTH_LONG).show();
+//            });
+
     private void init() {
         initLogIn();
 
@@ -43,9 +58,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initLogIn() {
-        Intent intent = new Intent(this, LogInActivity.class);
-        startActivity(intent);
-//        finish();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!preferences.getBoolean("is_logged_in", false)) {
+//            Timber.d("ULOGOVAN");
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        }
+//        sharedPreferencesActivityResultLauncher.launch(intent);
     }
 
     private void initViewPager() {
