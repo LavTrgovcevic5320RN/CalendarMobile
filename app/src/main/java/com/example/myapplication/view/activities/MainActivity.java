@@ -19,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.myapplication.R;
 import com.example.myapplication.view.viewpager.PagerAdapter;
 import com.example.myapplication.viewmodels.SplashViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,15 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("NonConstantResourceId")
     private void initNavigation() {
-//        ((BottomNavigationView)findViewById(R.id.bottomNavigation)).setOnItemSelectedListener(item -> {
-//            switch (item.getItemId()) {
-//                // setCurrentItem metoda viewPager samo obavesti koji je Item trenutno aktivan i onda metoda getItem u adapteru setuje odredjeni fragment za tu poziciju
-//                case R.id.menu_calendar: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_1, false); break;
-//                case R.id.menu_day_schedule: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_2, false); break;
-//                case R.id.menu_profile: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_3, false); break;
-//            }
-//            return true;
-//        });
+        ((BottomNavigationView)findViewById(R.id.bottomNavigation)).setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                // setCurrentItem metoda viewPager samo obavesti koji je Item trenutno aktivan i onda metoda getItem u adapteru setuje odredjeni fragment za tu poziciju
+                case R.id.menu_calendar: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_1, false); break;
+                case R.id.menu_day_schedule: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_2, false); break;
+                case R.id.menu_profile: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_3, false); break;
+            }
+            return true;
+        });
     }
 
 

@@ -1,6 +1,5 @@
 package com.example.myapplication.view.calendar;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,50 +8,50 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.view.fragments.Day;
 
-import java.util.Date;
-import java.util.List;
+import androidx.annotation.NonNull;
 
-public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHolder> {
+import java.util.ArrayList;
 
-    private List<Date> dates;
-    private int highestPriorityTaskDateIndex;
+public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.DayViewHolder> {
+    private ArrayList<Day> daysList;
 
-    public CalendarAdapter(List<Date> dates, int highestPriorityTaskDateIndex) {
-        this.dates = dates;
-        this.highestPriorityTaskDateIndex = highestPriorityTaskDateIndex;
+    public CalendarAdapter(ArrayList<Day> daysList) {
+        this.daysList = daysList;
+    }
+
+    @NonNull
+    @Override
+    public DayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_day, parent, false);
+        return new DayViewHolder(view);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.calendar_item_layout, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Date date = dates.get(position);
-        holder.dayOfMonthTextView.setText(String.valueOf(date.getDate()));
-
-        if (position == highestPriorityTaskDateIndex) {
-            holder.dayOfMonthTextView.setTextColor(Color.RED);
-        } else {
-            holder.dayOfMonthTextView.setTextColor(Color.BLACK);
-        }
+    public void onBindViewHolder(@NonNull DayViewHolder holder, int position) {
+        Day day = daysList.get(position);
+        holder.dayTextView.setText(String.valueOf(day.getDay()));
+        // Dodajte kod za postavljanje klika na dan u kalendaru
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Ovde možete otvoriti prozor za prikaz svih obaveza za taj dan ili izvršiti željenu akciju na klik.
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return dates.size();
+        return daysList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView dayOfMonthTextView;
+    static class DayViewHolder extends RecyclerView.ViewHolder {
+        TextView dayTextView;
 
-        public ViewHolder(View view) {
-            super(view);
-            dayOfMonthTextView = (TextView) view.findViewById(R.id.dayOfMonthTextView);
+        public DayViewHolder(@NonNull View itemView) {
+            super(itemView);
+            dayTextView = itemView.findViewById(R.id.dayTextView);
         }
     }
 }

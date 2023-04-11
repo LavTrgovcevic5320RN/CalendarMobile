@@ -44,7 +44,7 @@ public class CalendarView extends AppCompatActivity {
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
-        calendarAdapter = new CalendarAdapter(dates, highestPriorityTaskDateIndex);
+//        calendarAdapter = new CalendarAdapter(dates, highestPriorityTaskDateIndex);
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
