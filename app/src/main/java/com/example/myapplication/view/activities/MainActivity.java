@@ -43,17 +43,8 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
-//    ActivityResultLauncher<Intent> sharedPreferencesActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-//                SharedPreferences sharedPreferences = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-//                String message = sharedPreferences.getString(PreferenceActivity.PREF_MESSAGE_KEY, "");
-//                if (message == null)
-//                    message = "Error";
-//                Toast.makeText(this, "We have written to pref: " + message, Toast.LENGTH_LONG).show();
-//            });
-
     private void init() {
         initLogIn();
-
         initViewPager();
         initNavigation();
     }

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.view.recycler.adapter.CalendarAdapter;
 import com.google.android.material.snackbar.Snackbar;
 import com.example.myapplication.R;
 import com.example.myapplication.viewmodels.RecyclerViewModel;
@@ -22,7 +24,7 @@ public class RecyclerActivity extends AppCompatActivity {
     private ConstraintLayout mainLayout;
 
     private RecyclerViewModel recyclerViewModel;
-//    private CarAdapter carAdapter;/
+    private CalendarAdapter calendarAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
     private void init() {
         initView();
-        initListeners();
         initObservers();
-//        initRecycler();
     }
 
     private void initView() {
@@ -46,50 +46,25 @@ public class RecyclerActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.doMagicBtn);
     }
 
-    private void initListeners() {
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-//                recyclerViewModel.filterCars(s.toString());
-            }
-        });
-
-        addBtn.setOnClickListener(v -> {
-//            showAddSnackBar(
-//                    recyclerViewModel.addCar("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR9vMHQzf3GMYiI2WnYG9TUKnGAQFevruSgJF35VLAJe_odBMVd&usqp=CAU",
-//                            "Ikea",
-//                            "LILLABO")
-//            );
-        });
-    }
-
     private void showAddSnackBar(int id) {
         Snackbar
                 .make(mainLayout, "Item added", Snackbar.LENGTH_SHORT)
-//                .setAction("Undo", view -> recyclerViewModel.removeCar(id))
+                .setAction("Undo", view -> recyclerViewModel.removeDay(id))
                 .show();
     }
 
     private void initObservers() {
-//        recyclerViewModel.getCars().observe(this, cars -> {
-//            carAdapter.submitList(cars);
-//        });
+        recyclerViewModel.getDays().observe(this, days -> {
+            calendarAdapter.submitList(days);
+        });
     }
 
 //    private void initRecycler() {
-//        carAdapter = new CarAdapter(new CarDiffItemCallback(), car -> {
+//        calendarAdapter = new CarAdapter(new CarDiffItemCallback(), car -> {
 //            Toast.makeText(this, car.getId() + "", Toast.LENGTH_SHORT).show();
 //        });
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setAdapter(carAdapter);
+//        recyclerView.setAdapter(calendarAdapter);
 //    }
 
 }
