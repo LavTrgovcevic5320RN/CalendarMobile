@@ -9,13 +9,11 @@ public class DayDiffItemCallBack extends DiffUtil.ItemCallback<Day> {
 
     @Override
     public boolean areItemsTheSame(@NonNull Day oldItem, @NonNull Day newItem) {
-        return oldItem.getId() == newItem.getId();
+        return oldItem.getLocalDate() == newItem.getLocalDate();
     }
 
     @Override
     public boolean areContentsTheSame(@NonNull Day oldItem, @NonNull Day newItem) {
-        return     oldItem.getDay()   == newItem.getDay()
-                && oldItem.getMonth() == newItem.getMonth()
-                && oldItem.getYear()  == newItem.getYear();
+        return oldItem.getLocalDate().equals(newItem.getLocalDate());
     }
 }

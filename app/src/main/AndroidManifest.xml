@@ -20,7 +20,6 @@
         <activity
             android:name=".view.activities.CalendarActivity"
             android:exported="false" />
-        <activity android:name=".view.activities.RecyclerActivity" />
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"

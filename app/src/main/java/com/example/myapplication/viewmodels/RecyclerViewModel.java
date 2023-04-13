@@ -3,31 +3,72 @@ package com.example.myapplication.viewmodels;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
 
 import com.example.myapplication.model.Day;
 
 public class RecyclerViewModel extends ViewModel {
 
-    public static int counter = 101;
-
     private final MutableLiveData<List<Day>> days = new MutableLiveData<>();
     private ArrayList<Day> dayList = new ArrayList<>();
 
     public RecyclerViewModel() {
-        Calendar calendar = Calendar.getInstance();
-        int j = 1;
-        for (int i = 1; i <= calendar.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            Day day = new Day(j, i, calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR));
-            day.setPicture("https://electric-fun.com/wp-content/uploads/2020/01/sony-car-796x418-1.jpg");
-            dayList.add(day);
-            j++;
+        Day day = new Day(LocalDate.now());
+
+        day = new Day(day.getLocalDate().minusDays(day.getLocalDate().getDayOfMonth()));
+
+        int daysToAdd = day.getLocalDate().lengthOfMonth();
+
+        while(!day.getLocalDate().getDayOfWeek().equals(DayOfWeek.MONDAY)){
+            day = new Day(day.getLocalDate().minusDays(1));
+            daysToAdd += 1;
         }
-        // We are doing this because cars.setValue in the background is first checking if the reference on the object is same
-        // and if it is it will not do notifyAll. By creating a new list, we get the new reference everytime
+
+        for(int i = 0; i < daysToAdd; i++){
+            dayList.add(new Day(day.getLocalDate().plusDays(i)));
+        }
+
+        ArrayList<Day> listToSubmit = new ArrayList<>(dayList);
+        days.setValue(listToSubmit);
+    }
+
+    public void addMonth() {
+        int daysToAdd = dayList.get(dayList.size()-1).getLocalDate().lengthOfMonth();
+
+        for(int i = 0; i < daysToAdd; i++){
+            Day day = new Day(dayList.get(dayList.size()-1).getLocalDate().plusDays(1));
+            dayList.add(day);
+        }
+
+        ArrayList<Day> listToSubmit = new ArrayList<>(dayList);
+        days.setValue(listToSubmit);
+    }
+
+    public void addMonthToBeginning() {
+        int daysToAdd = 0;
+
+        if(dayList.get(0).getLocalDate().minusDays(1).getMonth().equals(dayList.get(0).getLocalDate().getMonth())){
+            daysToAdd = dayList.get(0).getLocalDate().getDayOfMonth()-1;
+        }else{
+            daysToAdd = dayList.get(0).getLocalDate().minusDays(1).lengthOfMonth();
+        }
+
+        for(int i = 0; i < daysToAdd; i++){
+            Day day = new Day(dayList.get(0).getLocalDate().minusDays(1));
+            dayList.add(0, day);
+        }
+
+        Day day = new Day(dayList.get(0).getLocalDate());
+
+        while(!day.getLocalDate().getDayOfWeek().equals(DayOfWeek.MONDAY)){
+            day = new Day(dayList.get(0).getLocalDate().minusDays(1));
+            dayList.add(0 ,day);
+        }
+
         ArrayList<Day> listToSubmit = new ArrayList<>(dayList);
         days.setValue(listToSubmit);
     }
@@ -35,28 +76,4 @@ public class RecyclerViewModel extends ViewModel {
     public LiveData<List<Day>> getDays() {
         return days;
     }
-
-    public void filterDay(String filter) {
-//        List<Day> filteredList = dayList.stream().filter(car -> car.getYear());
-//        days.setValue(filteredList);
-    }
-
-    public int addDay(Integer dan, Integer mesec, Integer godina) {
-        int id = counter++;
-        Day day = new Day(id, dan, mesec, godina);
-        dayList.add(day);
-        ArrayList<Day> listToSubmit = new ArrayList<>(dayList);
-        days.setValue(listToSubmit);
-        return id;
-    }
-
-    public void removeDay(int id) {
-        Optional<Day> carObject = dayList.stream().filter(car -> car.getId() == id).findFirst();
-        if (carObject.isPresent()) {
-            dayList.remove(carObject.get());
-            ArrayList<Day> listToSubmit = new ArrayList<>(dayList);
-            days.setValue(listToSubmit);
-        }
-    }
-
 }

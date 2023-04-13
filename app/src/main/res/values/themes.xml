@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Vezbe3" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Vezbe3" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="TextViewStyle" parent="Theme.Vezbe3">
@@ -26,6 +28,5 @@
         <item name="android:layout_height">70dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
-
 
 </resources>
