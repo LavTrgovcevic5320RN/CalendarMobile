@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.model.Day;
+import com.example.myapplication.view.activities.MainActivity;
 
 import androidx.annotation.NonNull;
 
@@ -45,7 +46,9 @@ public class CalendarAdapter extends ListAdapter<Day, CalendarAdapter.ViewHolder
         Day day = getItem(position);
         holder.bind(day);
 
-//        Dodati za Dane ovde
+        holder.itemView.setOnClickListener(view -> {
+            ((MainActivity)holder.itemView.getContext()).openDay(day);
+        });
     }
 
 
@@ -70,10 +73,11 @@ public class CalendarAdapter extends ListAdapter<Day, CalendarAdapter.ViewHolder
         }
 
         public void bind(Day day) {
-            Timber.d("Dan 1:  %s", day.getLocalDate());
-            Timber.d("Dan 2:  %s", day.getLocalDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
-            Timber.d("Dan 3:  %s", day.getLocalDate().getDayOfMonth());
-            Timber.d("------------------------------------------------");
+//            Timber.d("Dan 1:  %s", day.getLocalDate());
+//            Timber.d("Dan 2:  %s", day.getLocalDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
+//            Timber.d("Dan 3:  %s", day.getLocalDate().getDayOfMonth());
+//            Timber.d("------------------------------------------------");
+
             dayOfWeek.setText(day.getLocalDate().getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
             dayOfMonth.setText(String.valueOf(day.getLocalDate().getDayOfMonth()));
 

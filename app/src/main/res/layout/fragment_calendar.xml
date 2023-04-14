@@ -11,6 +11,7 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+
     <!-- Prikaz kalendara u vidu RecyclerView-a -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

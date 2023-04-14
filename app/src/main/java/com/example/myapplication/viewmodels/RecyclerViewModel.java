@@ -76,4 +76,8 @@ public class RecyclerViewModel extends ViewModel {
     public LiveData<List<Day>> getDays() {
         return days;
     }
+
+    public ArrayList<Day> getDayList() {
+        return dayList;
+    }
 }

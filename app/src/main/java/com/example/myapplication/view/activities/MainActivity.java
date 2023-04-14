@@ -18,14 +18,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.myapplication.R;
+import com.example.myapplication.model.Day;
 import com.example.myapplication.view.viewpager.PagerAdapter;
 import com.example.myapplication.viewmodels.SplashViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SplashViewModel splashViewModel;
+    private Day selectedDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void openDay(Day day) {
+        this.selectedDay = day;
+        ((BottomNavigationView)findViewById(R.id.bottomNavigation)).setSelectedItemId(R.id.menu_day_schedule);
+        setTitle(selectedDay.getLocalDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + selectedDay.getLocalDate().getDayOfMonth() + ". " + selectedDay.getLocalDate().getYear());
+        viewPager.setCurrentItem(PagerAdapter.FRAGMENT_2, false);
 
-
+    }
 }

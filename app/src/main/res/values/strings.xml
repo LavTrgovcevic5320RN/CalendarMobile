@@ -11,19 +11,8 @@
     <string name="menu_calendar" />
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="month_january" />
-    <string name="month_february" />
-    <string name="month_march" />
-    <string name="month_april" />
-    <string name="month_may" />
-    <string name="month_june" />
-    <string name="month_july" />
-    <string name="month_august" />
-    <string name="month_september" />
-    <string name="month_october" />
-    <string name="month_november" />
-    <string name="month_december" />
     <string name="tmp_email">TMP EMAIL</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="mon">Mon</string>
 </resources>
