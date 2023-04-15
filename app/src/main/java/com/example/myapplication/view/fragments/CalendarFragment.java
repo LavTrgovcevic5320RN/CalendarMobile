@@ -20,14 +20,9 @@ import com.example.myapplication.view.recycler.adapter.CalendarAdapter;
 import com.example.myapplication.view.recycler.differ.DayDiffItemCallBack;
 import com.example.myapplication.viewmodels.RecyclerViewModel;
 
-import java.text.SimpleDateFormat;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
-
-import timber.log.Timber;
 
 public class CalendarFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -54,7 +49,7 @@ public class CalendarFragment extends Fragment {
 
     private void initView() {
         recyclerView = view.findViewById(R.id.recyclerView);
-        month = view.findViewById(R.id.monthTitleTextView);
+//        month = view.findViewById(R.id.monthTitleTextView);
     }
 
     private void initObservers() {
@@ -75,7 +70,7 @@ public class CalendarFragment extends Fragment {
 //                    Timber.d("DAN DOLE %s", String.valueOf(day.getLocalDate().getDayOfMonth()));
 //                    Timber.d("------------------------------------------------");
                     if(day.getLocalDate().getDayOfMonth() >= 25){
-                        month.setText(day.getLocalDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + day.getLocalDate().getYear() + ".");
+                        getActivity().setTitle(day.getLocalDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + day.getLocalDate().getYear() + ".");
                     }
                 }
 //              Promena imena meseca kada skrolujemo na gore
@@ -85,7 +80,7 @@ public class CalendarFragment extends Fragment {
 //                    Timber.d("DAN GORE %s", String.valueOf(day.getLocalDate().getDayOfMonth()));
 //                    Timber.d("------------------------------------------------");
                     if(day.getLocalDate().getDayOfMonth() <= 15){
-                        month.setText(day.getLocalDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + day.getLocalDate().getYear() + ".");
+                        getActivity().setTitle(day.getLocalDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + day.getLocalDate().getYear() + ".");
                     }
                 }
 

@@ -76,9 +76,14 @@ public class MainActivity extends AppCompatActivity {
         ((BottomNavigationView)findViewById(R.id.bottomNavigation)).setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 // setCurrentItem metoda viewPager samo obavesti koji je Item trenutno aktivan i onda metoda getItem u adapteru setuje odredjeni fragment za tu poziciju
-                case R.id.menu_calendar: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_1, false); break;
+                case R.id.menu_calendar:
+                    if(selectedDay != null){
+                        setTitle(selectedDay.getLocalDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + selectedDay.getLocalDate().getYear() + ".");
+                    }
+                    viewPager.setCurrentItem(PagerAdapter.FRAGMENT_1, false);break;
 //                case R.id.menu_day_schedule: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_2, false); break;
-                case R.id.menu_profile: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_3, false); break;
+                case R.id.menu_profile:
+                    viewPager.setCurrentItem(PagerAdapter.FRAGMENT_3, false); break;
             }
             return true;
         });

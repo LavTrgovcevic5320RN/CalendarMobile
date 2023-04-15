@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.myapplication.view.fragments.CalendarFragment;
+import com.example.myapplication.view.fragments.DayScheduleFragment;
 import com.example.myapplication.view.fragments.ProfileFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
@@ -26,9 +27,12 @@ public class PagerAdapter extends FragmentPagerAdapter {
         Fragment fragment;
         if (position == FRAGMENT_1) {
             fragment = new CalendarFragment();
-        } else {
+        }else if(position == FRAGMENT_3){
             fragment = new ProfileFragment();
+        }else{
+            fragment = new DayScheduleFragment();
         }
+
         return fragment;
     }
 

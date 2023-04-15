@@ -2,21 +2,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Prikaz naslova meseca na vrhu ekrana -->
-    <TextView
-        android:id="@+id/monthTitleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-
     <!-- Prikaz kalendara u vidu RecyclerView-a -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/monthTitleTextView" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

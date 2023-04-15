@@ -20,8 +20,6 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-import timber.log.Timber;
-
 public class CalendarAdapter extends ListAdapter<Day, CalendarAdapter.ViewHolder> {
     private final Consumer<Day> onDayClicked;
 
