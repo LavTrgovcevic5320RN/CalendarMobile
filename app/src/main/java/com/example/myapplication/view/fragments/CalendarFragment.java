@@ -28,7 +28,6 @@ public class CalendarFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerViewModel recyclerViewModel;
     private CalendarAdapter calendarAdapter;
-    private TextView month;
     private View view;
 
     @Nullable
@@ -49,7 +48,6 @@ public class CalendarFragment extends Fragment {
 
     private void initView() {
         recyclerView = view.findViewById(R.id.recyclerView);
-//        month = view.findViewById(R.id.monthTitleTextView);
     }
 
     private void initObservers() {

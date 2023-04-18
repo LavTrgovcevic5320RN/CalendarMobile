@@ -58,17 +58,15 @@ public class LogInActivity extends AppCompatActivity {
         password = findViewById(R.id.password_edit_text);
     }
 
-//    private boolean checkIfLoggedIn() {
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        if (preferences.getBoolean("is_logged_in", false)) {
-//            Timber.d("ULOGOVAN");
-//            Intent intent = new Intent(this, BottomNavigationActivity.class);
-//            startActivity(intent);
-//            finish();
-//            return true;
-//        }
-//        return false;
-//    }
+    private boolean checkIfLoggedIn() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getBoolean("is_logged_in", false)) {
+            Timber.d("ULOGOVAN");
+            finish();
+            return true;
+        }
+        return false;
+    }
 
     private void initListeners() {
         loginBtn.setOnClickListener(view -> {
@@ -98,14 +96,12 @@ public class LogInActivity extends AppCompatActivity {
             }
 
             Map<String,String> map = readPasswordFromRawResource(getApplicationContext(), R.raw.password);
-
             if(!map.containsKey(email.getText().toString())){
                 Snackbar.make(findViewById(android.R.id.content), "Incorrect email.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
             if(!map.containsValue(password.getText().toString())){
-//                Toast.makeText(MainActivity.this, "Incorrect password.", Toast.LENGTH_SHORT).show();
                 Snackbar.make(findViewById(android.R.id.content), "Incorrect password.", Snackbar.LENGTH_SHORT).show();
                 return;
             }

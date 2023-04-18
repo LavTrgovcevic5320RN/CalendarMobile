@@ -5,10 +5,8 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.view.activities.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -71,52 +68,44 @@ public class ProfileFragment extends Fragment {
         View dialogView = inflater.inflate(R.layout.dialog_change_password, null);
         builder.setView(dialogView);
 
-        builder.setPositiveButton("Change", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                EditText OldPassword = dialogView.findViewById(R.id.old_password);
-                EditText NewPassword = dialogView.findViewById(R.id.new_password);
-                EditText ConfirmNewPassword = dialogView.findViewById(R.id.confirm_password);
+        builder.setPositiveButton("Change", (dialog, which) -> {
+            EditText OldPassword = dialogView.findViewById(R.id.old_password);
+            EditText NewPassword = dialogView.findViewById(R.id.new_password);
+            EditText ConfirmNewPassword = dialogView.findViewById(R.id.confirm_password);
 
-                String oldPassword = OldPassword.getText().toString();
-                String newPassword = NewPassword.getText().toString();
-                String confirmNewPassword = ConfirmNewPassword.getText().toString();
+            String oldPassword = OldPassword.getText().toString();
+            String newPassword = NewPassword.getText().toString();
+            String confirmNewPassword = ConfirmNewPassword.getText().toString();
 
-                String emailInfo = sharedPreferences.getString("email", "");
-                String passwordInfo = sharedPreferences.getString("password", "");
+            String emailInfo = sharedPreferences.getString("email", "");
+            String passwordInfo = sharedPreferences.getString("password", "");
 
-                if(!oldPassword.equals(passwordInfo)){
-                    Toast.makeText(getActivity(), "The old password is wrong", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(!newPassword.equals(confirmNewPassword)){
-                    Toast.makeText(getActivity(), "The new password isn't the same", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("password", newPassword);
-                editor.apply();
-
-                changePassword(getContext(), R.raw.password, emailInfo, oldPassword, newPassword);
-
-                Toast.makeText(getActivity(), "Password change successful.", Toast.LENGTH_SHORT).show();
+            if(!oldPassword.equals(passwordInfo)){
+                Toast.makeText(getActivity(), "The old password is wrong", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            if(!newPassword.equals(confirmNewPassword)){
+                Toast.makeText(getActivity(), "The new password isn't the same", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("password", newPassword);
+            editor.apply();
+
+            changePassword(emailInfo, oldPassword, newPassword);
+
+            Toast.makeText(getActivity(), "Password change successful.", Toast.LENGTH_SHORT).show();
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
 
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    public void changePassword(Context context, int resourceId, String email, String oldPassword, String newPassword) {
+    public void changePassword(String email, String oldPassword, String newPassword) {
         try {
             File dir = new File(getContext().getFilesDir(), "mydir");
             File gpxfile = new File(dir, "password.txt");
@@ -166,22 +155,14 @@ public class ProfileFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Log Out");
         builder.setMessage("Are you sure you want to log out?");
-        builder.setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("is_logged_in", false);
-                editor.apply();
+        builder.setPositiveButton("Log Out", (dialog, which) -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("is_logged_in", false);
+            editor.apply();
 
-                Toast.makeText(getActivity(), "Logged out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Logged out", Toast.LENGTH_SHORT).show();
 
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                startActivity(intent);
-                getActivity().finish();
-
-                // STA JE BOLJE OVAKO SAMO IZADJE IZ APLIKACIJE PRILIKOM LOG OUT-a, kad se odkomentarise on mi otvori novi MainActivity?
-            }
+            requireActivity().finish();
         });
         builder.setNegativeButton("Cancel", null);
         builder.show();

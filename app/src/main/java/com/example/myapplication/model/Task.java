@@ -1,37 +1,40 @@
 package com.example.myapplication.model;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Task {
-    private String name;
-    private Date time;
+public class Task implements Serializable {
+    private String title;
+    private String time;
     private String priority;
     private String picture;
-    private String title;
-    private String opis;
+    private String description;
 
-    public Task(String name, Date time, String priority, String picture, String title, String opis) {
-        this.name = name;
+    public Task(String title, String time, String priority, String description) {
+        this.title = title;
         this.time = time;
         this.priority = priority;
-        this.picture = picture;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return title + "," + time + "," + priority + "," + description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
-        this.opis = opis;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -51,19 +54,11 @@ public class Task {
         this.picture = picture;
     }
 
-    public String getTitle() {
-        return title;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getOpis() {
-        return opis;
-    }
-
-    public void setOpis(String opis) {
-        this.opis = opis;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

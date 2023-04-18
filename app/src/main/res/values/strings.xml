@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name" translatable="false">Vezbe3</string>
+    <string name="app_name" translatable="false">Dnevnjak</string>
     <string name="first">First</string>
     <string name="second">Second</string>
     <string name="third">Third</string>
     <string name="fourth">Fourth</string>
     <string name="fifth">Fifth</string>
     <string name="login">Login</string>
-    <string name="menu_profile" />
-    <string name="menu_day_schedule" />
-    <string name="menu_calendar" />
+    <string name="menu_calendar">Calendar</string>
+    <string name="menu_day_schedule">Daily plan</string>
+    <string name="menu_profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tmp_email">TMP EMAIL</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
+    <string name="username">  Username</string>
+    <string name="password">  Password</string>
     <string name="mon">Mon</string>
     <string name="add">Add</string>
 </resources>

@@ -23,6 +23,7 @@ import com.example.myapplication.view.viewpager.PagerAdapter;
 import com.example.myapplication.viewmodels.SplashViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private SplashViewModel splashViewModel;
     private Day selectedDay;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-
         setContentView(R.layout.activity_main);
         init();
     }
@@ -57,13 +58,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initLogIn() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!preferences.getBoolean("is_logged_in", false)) {
-//            Timber.d("ULOGOVAN");
+        setTitle(LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + LocalDate.now().getYear() + ".");
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        if (!sharedPreferences.getBoolean("is_logged_in", false)) {
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         }
-//        sharedPreferencesActivityResultLauncher.launch(intent);
     }
 
     private void initViewPager() {
@@ -79,9 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.menu_calendar:
                     if(selectedDay != null){
                         setTitle(selectedDay.getLocalDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + selectedDay.getLocalDate().getYear() + ".");
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("title", selectedDay.getLocalDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + selectedDay.getLocalDate().getYear() + ".");
+                        editor.apply();
                     }
                     viewPager.setCurrentItem(PagerAdapter.FRAGMENT_1, false);break;
-//                case R.id.menu_day_schedule: viewPager.setCurrentItem(PagerAdapter.FRAGMENT_2, false); break;
                 case R.id.menu_profile:
                     viewPager.setCurrentItem(PagerAdapter.FRAGMENT_3, false); break;
             }
@@ -93,7 +95,12 @@ public class MainActivity extends AppCompatActivity {
     public void openDay(Day day) {
         this.selectedDay = day;
         ((BottomNavigationView)findViewById(R.id.bottomNavigation)).setSelectedItemId(R.id.menu_day_schedule);
+
         setTitle(selectedDay.getLocalDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + selectedDay.getLocalDate().getDayOfMonth() + ". " + selectedDay.getLocalDate().getYear());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("title", selectedDay.getLocalDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + selectedDay.getLocalDate().getDayOfMonth() + ". " + selectedDay.getLocalDate().getYear());
+        editor.apply();
+
         viewPager.setCurrentItem(PagerAdapter.FRAGMENT_2, false);
 
     }

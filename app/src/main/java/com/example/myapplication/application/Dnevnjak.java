@@ -4,7 +4,7 @@ import android.app.Application;
 
 import timber.log.Timber;
 
-public class Vezbe3Application extends Application {
+public class Dnevnjak extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

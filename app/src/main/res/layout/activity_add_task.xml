@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/LighterBlue"
+    tools:context=".view.activities.AddTaskActivity">
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="382dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/edit_text_rounded_bg"
+        android:gravity="top|start|center|bottom"
+        android:paddingLeft="10dp"
+        android:hint="Title"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="149dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/editTextTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/edit_text_rounded_bg"
+        android:gravity="top|start|center|bottom"
+        android:paddingLeft="10dp"
+        android:hint="Time"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/buttonChooseTime"
+        android:backgroundTint="@color/LightDarkBlue"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="24dp"
+        android:text="Choose Time" />
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="338dp"
+        android:layout_height="376dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="237dp"
+        android:background="@drawable/edit_text_rounded_bg"
+        android:gravity="top|start"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:maxLines="20" />
+
+    <Button
+        android:id="@+id/buttonDodajTask"
+        android:backgroundTint="@color/LightDarkBlue"
+        android:textColor="@color/white"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextDescription"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:text="Create" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:backgroundTint="@color/LightDarkBlue"
+        android:textColor="@color/white"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextDescription"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="38dp"
+        android:text="Cancel" />
+
+</RelativeLayout>
+
