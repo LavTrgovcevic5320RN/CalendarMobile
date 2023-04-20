@@ -6,6 +6,31 @@
     android:layout_height="match_parent"
     android:id="@+id/recyclerTask">
 
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="50dp"
+        android:hint="Search through tasks"
+        android:textSize="18sp"
+        android:background="@drawable/edit_text_rounded_bg"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageView
+        android:id="@+id/magnifying_glass"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/lowPriorityDayTask"
         android:layout_width="0dp"
@@ -17,9 +42,10 @@
         android:onClick="onTextViewClick"
         android:text="@string/low"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/midPriorityDayTask"
         app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -35,6 +61,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/lowPriorityDayTask"
         app:layout_constraintEnd_toStartOf="@id/highPriorityDayTask"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
         app:layout_constraintHorizontal_weight="1"
         tools:ignore="MissingConstraints" />
 
@@ -51,6 +78,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/midPriorityDayTask"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
         app:layout_constraintHorizontal_weight="1"
         tools:ignore="MissingConstraints" />
 

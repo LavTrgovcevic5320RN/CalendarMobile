@@ -1,0 +1,13 @@
+<!-- magnifying_glass.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M16.29,14.12l-2.17,-2.17C14.3,10.68 15,9.11 15,7.5C15,3.91 12.09,1 8.5,1C4.91,1 2,3.91 2,7.5C2,11.09 4.91,14 8.5,14c1.61,0 3.18,-0.7 4.45,-1.98l2.17,2.17l1.41,-1.41zM14.73,12.29C13.23,13.57 11.37,14.5 9.25,14.95C9.54,13.89 10.11,12.86 10.86,12.11l1.41,1.41zM8.5,13C6.01,13 4,10.99 4,8.5S6.01,4 8.5,4 13,6.01 13,8.5S10.99,13 8.5,13z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,0h24v24H0z"/>
+</vector>

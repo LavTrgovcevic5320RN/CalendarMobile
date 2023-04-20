@@ -6,9 +6,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +34,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import timber.log.Timber;
 
 public class DayScheduleFragment extends Fragment implements View.OnCreateContextMenuListener {
+    private EditText searchBar;
     private TextView lowPriority;
     private TextView midPriority;
     private TextView highPriority;
@@ -63,6 +67,7 @@ public class DayScheduleFragment extends Fragment implements View.OnCreateContex
     }
 
     private void initView() {
+        searchBar = view.findViewById(R.id.search_bar);
         lowPriority = view.findViewById(R.id.lowPriorityDayTask);
         midPriority = view.findViewById(R.id.midPriorityDayTask);
         highPriority = view.findViewById(R.id.highPriorityDayTask);
@@ -71,6 +76,23 @@ public class DayScheduleFragment extends Fragment implements View.OnCreateContex
     }
 
     private void initObservers() {
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                String searchQuery = s.toString().toLowerCase();
+                recyclerTaskViewModel.filterTaskBasedOnTitle(searchQuery);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+
         lowPriority.setOnClickListener(view -> onTextViewClick(view, lowPriority.getText().toString()));
 
         midPriority.setOnClickListener(view -> onTextViewClick(view, midPriority.getText().toString()));

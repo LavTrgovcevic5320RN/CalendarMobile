@@ -71,6 +71,11 @@ public class RecyclerTaskViewModel extends ViewModel {
         tasks.setValue(filteredList);
     }
 
+    public void filterTaskBasedOnTitle(String filter) {
+        List<Task> filteredList = taskList.stream().filter(task -> task.getTitle().toLowerCase().startsWith(filter.toLowerCase())).collect(Collectors.toList());
+        tasks.setValue(filteredList);
+    }
+
     public HashMap<String, MutableLiveData<List<Task>>> getMap() {
         return map;
     }
@@ -98,6 +103,7 @@ public class RecyclerTaskViewModel extends ViewModel {
     public void setTaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
+
 
 
 }

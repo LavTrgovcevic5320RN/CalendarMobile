@@ -4,16 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:id="@+id/taskLayout"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/LighterBlue">
 
     <ImageView
         android:id="@+id/taskPicture"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="68dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/timeTaskTextView"
