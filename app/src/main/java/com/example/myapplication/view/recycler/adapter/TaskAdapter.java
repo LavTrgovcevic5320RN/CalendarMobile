@@ -64,9 +64,9 @@ public class TaskAdapter extends ListAdapter<Task, TaskAdapter.ViewHolder> {
         Task task = getItem(position);
         holder.bind(task);
 
-        /*holder.itemView.setOnClickListener(view -> {
-            dayScheduleFragment.editTask(task);
-        });*/
+        holder.itemView.setOnClickListener(view -> {
+            dayScheduleFragment.showDetailedTask(position);
+        });
 
         editButton.setOnClickListener(view -> {
             dayScheduleFragment.editTask(position);
@@ -74,13 +74,11 @@ public class TaskAdapter extends ListAdapter<Task, TaskAdapter.ViewHolder> {
 
         deleteButton.setOnClickListener(view -> {
             Timber.d("Brisanje taskova");
-//            dayScheduleFragment.initTitle();
             dayScheduleFragment.deleteTask(position);
         });
 
         addButton.setOnClickListener(view -> {
             Timber.d("Dodavanje taskova");
-//            dayScheduleFragment.initTitle();
             dayScheduleFragment.addTask();
         });
     }

@@ -6,16 +6,64 @@
     android:layout_height="match_parent"
     android:id="@+id/recyclerTask">
 
+    <TextView
+        android:id="@+id/lowPriorityDayTask"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/Green"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onTextViewClick"
+        android:text="@string/low"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/midPriorityDayTask"
+        app:layout_constraintHorizontal_weight="1"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/midPriorityDayTask"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/Yellow"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onTextViewClick"
+        android:text="@string/mid"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/lowPriorityDayTask"
+        app:layout_constraintEnd_toStartOf="@id/highPriorityDayTask"
+        app:layout_constraintHorizontal_weight="1"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/highPriorityDayTask"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/Orange"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onTextViewClick"
+        android:text="@string/high"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/midPriorityDayTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/taskRecycleView"
-        app:layout_constraintBottom_toTopOf="@id/buttonAddTask"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonAddTask"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/midPriorityDayTask"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

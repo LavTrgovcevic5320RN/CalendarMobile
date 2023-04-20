@@ -60,13 +60,9 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
 //              Promena imena meseca kada skrolujemo na dole
                 if(dy > 0){
                     Day day = recyclerViewModel.getDayList().get(((GridLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager())).findLastVisibleItemPosition());
-//                    Timber.d("------------------------------------------------");
-//                    Timber.d("DAN DOLE %s", String.valueOf(day.getLocalDate().getDayOfMonth()));
-//                    Timber.d("------------------------------------------------");
                     if(day.getLocalDate().getDayOfMonth() >= 25){
                         getActivity().setTitle(day.getLocalDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + day.getLocalDate().getYear() + ".");
                     }
@@ -74,9 +70,6 @@ public class CalendarFragment extends Fragment {
 //              Promena imena meseca kada skrolujemo na gore
                 if(dy < 0){
                     Day day = recyclerViewModel.getDayList().get(((GridLayoutManager) Objects.requireNonNull(recyclerView.getLayoutManager())).findLastVisibleItemPosition());
-//                    Timber.d("------------------------------------------------");
-//                    Timber.d("DAN GORE %s", String.valueOf(day.getLocalDate().getDayOfMonth()));
-//                    Timber.d("------------------------------------------------");
                     if(day.getLocalDate().getDayOfMonth() <= 15){
                         getActivity().setTitle(day.getLocalDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + day.getLocalDate().getYear() + ".");
                     }

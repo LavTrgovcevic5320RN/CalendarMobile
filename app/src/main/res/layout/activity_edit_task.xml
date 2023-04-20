@@ -1,91 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@color/LighterBlue"
     tools:context=".view.activities.AddTaskActivity">
 
+    <TextView
+        android:id="@+id/lowPriorityEditTask"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/Green"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onTextViewClick"
+        android:text="@string/low"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/midPriorityEditTask"
+        app:layout_constraintHorizontal_weight="1"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/midPriorityEditTask"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/Yellow"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onTextViewClick"
+        android:text="@string/mid"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/lowPriorityEditTask"
+        app:layout_constraintEnd_toStartOf="@id/highPriorityEditTask"
+        app:layout_constraintHorizontal_weight="1"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/highPriorityEditTask"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@color/Orange"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onTextViewClick"
+        android:text="@string/high"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/midPriorityEditTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        tools:ignore="MissingConstraints" />
+
     <EditText
         android:id="@+id/editTitle"
-        android:layout_width="382dp"
-        android:layout_height="35dp"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/edit_text_rounded_bg"
         android:gravity="top|start|center|bottom"
+        android:hint="@string/title"
+        android:inputType="text"
         android:paddingLeft="10dp"
-        android:hint="Title"
-        android:inputType="text" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textTime"
-        android:layout_width="149dp"
-        android:layout_height="37dp"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/editTitle"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="124dp"
         android:background="@drawable/edit_text_rounded_bg"
         android:gravity="top|start|center|bottom"
+        android:hint="@string/time"
         android:paddingLeft="10dp"
-        android:hint="Time"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonTime"
-        android:backgroundTint="@color/LightDarkBlue"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editTitle"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="49dp"
-        android:layout_marginEnd="24dp"
-        android:text="Choose Time" />
+    <ImageView
+        android:id="@+id/clockImageView"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="52dp"
+        android:background="@drawable/clock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editDescription"
-        android:layout_width="338dp"
+        android:layout_width="340dp"
         android:layout_height="376dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="237dp"
         android:background="@drawable/edit_text_rounded_bg"
         android:gravity="top|start"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        android:maxLines="20"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:hint="Description"
-        android:inputType="textMultiLine"
-        android:maxLines="20" />
+        android:paddingRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.543" />
 
     <Button
         android:id="@+id/buttonSaveTask"
-        android:backgroundTint="@color/LightDarkBlue"
-        android:textColor="@color/white"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editDescription"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="12dp"
-        android:text="Save" />
+        android:layout_marginStart="32dp"
+        android:backgroundTint="@color/LightDarkBlue"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonOtkazi"
+        app:layout_constraintHorizontal_bias="0.074"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDescription"
+        app:layout_constraintVertical_bias="0.421" />
 
     <Button
         android:id="@+id/buttonOtkazi"
-        android:backgroundTint="@color/LightDarkBlue"
-        android:textColor="@color/white"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editDescription"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="38dp"
-        android:text="Cancel" />
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="@color/LightDarkBlue"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDescription"
+        app:layout_constraintVertical_bias="0.431" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

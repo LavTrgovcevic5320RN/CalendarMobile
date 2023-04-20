@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -53,6 +54,8 @@ public class LogInActivity extends AppCompatActivity {
 
     private void initView() {
         loginBtn = findViewById(R.id.login_button);
+        Drawable backgroundDrawable = getResources().getDrawable(R.drawable.rounded_button);
+        loginBtn.setBackground(backgroundDrawable);
         email = findViewById(R.id.email_edit_text);
         username = findViewById(R.id.username_edit_text);
         password = findViewById(R.id.password_edit_text);

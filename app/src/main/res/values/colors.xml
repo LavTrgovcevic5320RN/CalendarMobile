@@ -11,4 +11,9 @@
     <color name="LightBlue">#E2FAFC</color>
     <color name="LightDarkBlue">#16D9EB</color>
     <color name="LighterBlue">#C5F6FA</color>
+    <color name="LikeTeal">#0C848F</color>
+
+    <color name="Green">#57CC99</color>
+    <color name="Yellow">#F7CD35</color>
+    <color name="Orange">#F58A51</color>
 </resources>
